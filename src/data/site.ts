@@ -14,13 +14,13 @@
  */
 
 export const site = {
-  name: 'Nombre Apellido',
-  firstName: 'Nombre',
-  initials: 'NA',
+  name: 'Carolina Amador',
+  firstName: 'Carolina',
+  initials: 'CA',
   role: 'Pedagoga',
 
   seo: {
-    title: 'Nombre Apellido | Pedagoga y orientación educativa',
+    title: 'Carolina Amador | Pedagoga y orientación educativa',
     description:
       'Pedagoga que acompaña a familias, estudiantes y docentes con orientación educativa, apoyo al aprendizaje y asesoramiento cercano y práctico.',
   },
@@ -87,7 +87,7 @@ export const site = {
   },
 
   about: {
-    title: 'Hola, soy Nombre',
+    title: 'Hola, soy Carolina',
     paragraphs: [
       'Soy pedagoga y llevo años acompañando a personas en su camino de aprendizaje. Creo que casi nadie “no vale para estudiar”: lo que suele faltar es encontrar el método, el ritmo y el apoyo adecuados.',
       'Trabajo con un enfoque cercano y sin juicios, con explicaciones claras y objetivos pequeños que se pueden alcanzar. Mi meta es que, cuando terminemos, ya no me necesites.',
@@ -215,14 +215,14 @@ export const site = {
     location: 'Tu ciudad y online',
     schedule: 'De lunes a viernes, de 9:00 a 19:00',
     instagram: 'https://www.instagram.com/tuusuario',
-    linkedin: 'https://www.linkedin.com/in/tuusuario',
+    linkedin: 'https://www.linkedin.com/in/carolina-amador-quesada-6703a1161/',
   },
 
   /** Datos para la página de Aviso legal (obligatorios en España si tienes actividad profesional). */
   legal: {
-    owner: 'Nombre Apellido',
-    taxId: '00000000X',
-    address: 'Calle Ejemplo 1, 28000, Tu ciudad',
+    owner: 'Carolina Amador Quesada',
+    taxId: '3081/26530630S',
+    address: '23400, Úbeda',
   },
 };
 
