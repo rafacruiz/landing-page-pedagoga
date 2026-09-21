@@ -1,0 +1,53 @@
+---
+import Photo from './Photo.astro';
+import { site, primaryCta } from '../data/site';
+
+const { hero } = site;
+// Cada frase del titular va en su propia línea para que la lectura sea natural.
+const sentences = hero.title.split(/(?<=[.!?])\s+/);
+const external = primaryCta.startsWith('http');
+---
+
+<section id="inicio" class="relative isolate overflow-hidden">
+  <div aria-hidden="true" class="paper-grid absolute inset-0 -z-10"></div>
+
+  <div class="relative mx-auto max-w-6xl px-5 pb-24 pt-12 md:px-8 md:pb-32 md:pt-20">
+    <!-- Línea roja del margen del cuaderno -->
+    <span aria-hidden="true" class="margin-line absolute inset-y-0 left-1 w-0.5 bg-margin/70 md:left-2"></span>
+
+    <div class="grid items-center gap-16 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:col-span-7">
+        <h1 class="text-[clamp(2.6rem,4.7vw,3.75rem)] font-extrabold leading-[1.04] tracking-[-0.035em]">
+          {sentences.map((sentence) => <span class="block">{sentence}</span>)}
+        </h1>
+        <p class="mt-7 max-w-xl text-lg leading-relaxed md:text-xl">{hero.text}</p>
+
+        <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
+          <a href={primaryCta} class="btn btn-primary" {...(external ? { target: '_blank', rel: 'noopener' } : {})}>
+            {hero.primaryCta}
+          </a>
+          <a href="#servicios" class="link-marker text-lg">{hero.secondaryCta}</a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="relative mx-auto w-full max-w-sm pb-8 lg:max-w-none">
+          <div aria-hidden="true" class="absolute inset-x-0 top-0 aspect-[4/5] translate-x-3 translate-y-3 rounded-t-full rounded-b-[2rem] border-2 border-ink"></div>
+          <Photo
+            name="perfil"
+            alt={hero.photoAlt}
+            loading="eager"
+            widths={[360, 540, 720]}
+            sizes="(min-width: 1024px) 420px, 80vw"
+            class="relative aspect-[4/5] w-full rounded-t-full rounded-b-[2rem]"
+          />
+          <p
+            class="note-stick absolute -bottom-2 -left-2 w-44 bg-marker p-4 font-display text-base font-semibold leading-snug text-ink shadow-[0_14px_24px_-12px_rgb(26_37_96/0.5)] sm:-left-8 sm:w-52"
+          >
+            {hero.note}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,92 @@
+---
+import Icon from './Icon.astro';
+import { site, links } from '../data/site';
+
+const { contact } = site;
+
+type Channel = { label: string; value: string; href?: string; icon: 'mail' | 'phone' | 'pin' | 'clock' };
+
+const channels: Channel[] = [
+  contact.email && { label: 'Email', value: contact.email, href: links.email ?? undefined, icon: 'mail' as const },
+  contact.phone && { label: 'Teléfono', value: contact.phone, href: links.phone ?? undefined, icon: 'phone' as const },
+  contact.location && { label: 'Dónde', value: contact.location, icon: 'pin' as const },
+  contact.schedule && { label: 'Horario', value: contact.schedule, icon: 'clock' as const },
+].filter(Boolean) as Channel[];
+
+const socials = [
+  contact.instagram && { label: 'Instagram', href: contact.instagram, icon: 'instagram' as const },
+  contact.linkedin && { label: 'LinkedIn', href: contact.linkedin, icon: 'linkedin' as const },
+].filter(Boolean) as { label: string; href: string; icon: 'instagram' | 'linkedin' }[];
+---
+
+<section id="contacto" class="bg-marker py-20 text-ink md:py-28">
+  <div class="mx-auto grid max-w-6xl gap-14 px-5 md:px-8 lg:grid-cols-12 lg:gap-12">
+    <div class="lg:col-span-6">
+      <h2 class="text-[clamp(2.5rem,5.6vw,4.4rem)] font-extrabold leading-[1.02] tracking-[-0.035em]">{contact.title}</h2>
+      <p class="mt-6 max-w-md text-lg leading-relaxed text-ink/85">{contact.text}</p>
+
+      <div class="mt-9 flex flex-wrap gap-3">
+        {
+          links.whatsapp && (
+            <a href={links.whatsapp} class="btn btn-primary" target="_blank" rel="noopener">
+              <Icon name="message" />
+              Escribir por WhatsApp
+            </a>
+          )
+        }
+        {
+          links.email && (
+            <a href={links.email} class="btn btn-outline">
+              <Icon name="mail" />
+              Enviar un email
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="lg:col-span-6 lg:pl-8">
+      <dl class="divide-y divide-ink/25 border-y border-ink/25">
+        {
+          channels.map((item) => (
+            <div class="flex items-center gap-5 py-5">
+              <Icon name={item.icon} class="size-6 shrink-0" />
+              <div class="min-w-0">
+                <dt class="text-sm font-medium text-ink/70">{item.label}</dt>
+                <dd class="break-words font-display text-xl font-bold md:text-2xl">
+                  {item.href ? (
+                    <a href={item.href} class="underline decoration-2 underline-offset-4 hover:decoration-4">
+                      {item.value}
+                    </a>
+                  ) : (
+                    item.value
+                  )}
+                </dd>
+              </div>
+            </div>
+          ))
+        }
+      </dl>
+
+      {
+        socials.length > 0 && (
+          <ul class="mt-6 flex gap-3">
+            {socials.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={item.label}
+                  class="grid size-12 place-items-center rounded-full border-2 border-ink transition-colors hover:bg-ink hover:text-marker"
+                >
+                  <Icon name={item.icon} class="size-5" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,87 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+
+// Los enlaces apuntan a "/#seccion" para que funcionen también desde otras páginas.
+const nav = site.nav.map((item) => ({ ...item, href: `/${item.href}` }));
+---
+
+<header
+  id="site-header"
+  data-scrolled="false"
+  class="sticky top-0 z-50 border-b border-transparent bg-paper/85 backdrop-blur-md transition-colors data-[scrolled=true]:border-ink/10"
+>
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-5 md:px-8">
+    <a href="/" class="flex items-center gap-3" aria-label={`${site.name}, ir al inicio`}>
+      <span class="grid size-10 place-items-center rounded-full bg-ink font-display text-base font-bold tracking-tight text-marker">
+        {site.initials}
+      </span>
+      <span class="leading-tight">
+        <span class="block font-display text-base font-bold text-ink">{site.name}</span>
+        <span class="block text-sm text-ink-soft">{site.role}</span>
+      </span>
+    </a>
+
+    <nav aria-label="Principal" class="hidden items-center gap-8 md:flex">
+      {
+        nav.map((item) => (
+          <a href={item.href} class="text-[0.95rem] font-medium text-ink-soft transition-colors hover:text-ink">
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a href="/#contacto" class="btn btn-primary !py-2 hidden md:inline-flex">Contacto</a>
+
+    <button
+      id="menu-btn"
+      type="button"
+      class="grid size-11 place-items-center rounded-full text-ink hover:bg-tint md:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Abrir menú"
+    >
+      <span data-icon="open"><Icon name="menu" class="size-6" /></span>
+      <span data-icon="close" class="hidden"><Icon name="close" class="size-6" /></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" hidden class="border-t border-ink/10 bg-paper md:hidden">
+    <nav aria-label="Menú móvil" class="mx-auto flex max-w-6xl flex-col px-5 py-3">
+      {
+        nav.map((item) => (
+          <a href={item.href} class="border-b border-ink/10 py-4 font-display text-xl font-bold text-ink">
+            {item.label}
+          </a>
+        ))
+      }
+      <a href="/#contacto" class="btn btn-primary my-5">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const button = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  const onScroll = () => header?.setAttribute('data-scrolled', String(window.scrollY > 8));
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  function setOpen(open: boolean) {
+    if (!button || !menu) return;
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    menu.hidden = !open;
+    button.querySelector('[data-icon="open"]')?.classList.toggle('hidden', open);
+    button.querySelector('[data-icon="close"]')?.classList.toggle('hidden', !open);
+  }
+
+  button?.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setOpen(false);
+  });
+</script>

@@ -1,0 +1,48 @@
+---
+import { site } from '../data/site';
+
+const t = site.testimonials;
+// Los testimonios de ejemplo solo se ven en local; en la web publicada se ocultan.
+const show = t.enabled && t.items.length > 0 && !(t.isExample && import.meta.env.PROD);
+const [featured, ...others] = t.items;
+---
+
+{
+  show && (
+    <section id="testimonios" class="py-20 md:py-28">
+      <div class="mx-auto max-w-6xl px-5 md:px-8">
+        <h2 class="max-w-2xl text-4xl font-extrabold leading-[1.05] md:text-5xl">{t.title}</h2>
+
+        {t.isExample && (
+          <p class="mt-4 w-fit rounded-full bg-marker px-4 py-1.5 text-sm font-medium text-ink">
+            Vista previa: estos testimonios son de ejemplo y no se publican hasta que los cambies.
+          </p>
+        )}
+
+        <figure class="mt-12 grid gap-8 lg:grid-cols-12 lg:gap-12">
+          <blockquote class="font-display text-3xl font-bold leading-[1.15] tracking-tight text-ink md:text-4xl lg:col-span-9">
+            “{featured.quote}”
+          </blockquote>
+          <figcaption class="self-end lg:col-span-3">
+            <p class="font-semibold text-ink">{featured.author}</p>
+            <p>{featured.context}</p>
+          </figcaption>
+        </figure>
+
+        {others.length > 0 && (
+          <div class="mt-14 grid gap-10 md:grid-cols-2 md:gap-14">
+            {others.map((item) => (
+              <figure class="border-l-4 border-margin pl-6">
+                <blockquote class="text-lg leading-relaxed text-ink">“{item.quote}”</blockquote>
+                <figcaption class="mt-4 text-[0.95rem]">
+                  <span class="font-semibold text-ink">{item.author}</span>
+                  <span class="block">{item.context}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}

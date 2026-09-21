@@ -1,0 +1,27 @@
+---
+import { site } from '../data/site';
+const { process } = site;
+---
+
+<section id="como-trabajo" data-theme="dark" class="bg-ink py-20 text-paper md:py-28">
+  <div class="mx-auto max-w-6xl px-5 md:px-8">
+    <div class="max-w-2xl">
+      <h2 class="text-4xl font-extrabold leading-[1.05] text-paper md:text-5xl">{process.title}</h2>
+      <p class="mt-5 text-lg leading-relaxed text-paper/80">{process.intro}</p>
+    </div>
+
+    <ol class="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+      {
+        process.items.map((step, index) => (
+          <li class="border-t-2 border-marker pt-5">
+            <span aria-hidden="true" class="font-display text-6xl font-extrabold leading-none text-marker">
+              {index + 1}
+            </span>
+            <h3 class="mt-4 text-xl font-bold text-paper">{step.title}</h3>
+            <p class="mt-2 leading-relaxed text-paper/80">{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
