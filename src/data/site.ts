@@ -1,5 +1,5 @@
 /**
- * ✏️  TODO EL CONTENIDO DE LA WEB VIVE EN ESTE ARCHIVO
+ *  TODO EL CONTENIDO DE LA WEB VIVE EN ESTE ARCHIVO
  *
  * Para personalizar la página no hace falta tocar ningún componente:
  * cambia los textos de abajo y guarda. Todo lo que aquí aparece como

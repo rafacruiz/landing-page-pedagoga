@@ -1,10 +1,10 @@
 # Landing page para pedagoga
 
-Web de una sola página, rápida y sin coste de hosting: **Astro + Tailwind CSS**, lista para publicar en **Netlify**.
+Web de una sola página y rápida: **Astro + Tailwind CSS**.
 
 ## Empezar
 
-Necesitas [Node.js](https://nodejs.org) 22.12 o superior.
+Necesita [Node.js](https://nodejs.org) 22.12 o superior.
 
 ```bash
 npm install
